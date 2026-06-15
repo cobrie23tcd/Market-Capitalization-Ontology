@@ -1,4 +1,5 @@
-# Market Capitalisation Ontology (MCO)
+# Market Capitalisation Ontology 
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20702097.svg)](https://doi.org/10.5281/zenodo.20702097)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![OWL 2](https://img.shields.io/badge/OWL-2-blue.svg)](https://www.w3.org/TR/owl2-overview/)
@@ -10,35 +11,24 @@
 >
 > **📦 Cite this ontology:**
 > [https://doi.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097)
-
-> _"Ontologies serve as the semantic layer necessary to building competent AI Agents 
-> with explicit domain knowledge. They serve to avoid AI hallucination in information 
-> retrieval by building a highly knowledgeable semiconductor supply chain model."_
+>
+> _"Ontologies serve as the semantic layer necessary to building competent AI Agents with explicit domain knowledge. They serve to avoid AI hallucination in information retrieval by building a highly knowledgeable semiconductor supply chain model."_
 
 ---
 
 ## 📌 Description
 
-The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models
-**semiconductor industry market capitalisation data**, providing a structured semantic
-representation of the global semiconductor supply chain as defined by the
-**Industrial Alliance on Processors and Semiconductor Technologies (IAPST)**.
+The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models **semiconductor industry market capitalisation data**, providing a structured semantic representation of the global semiconductor supply chain as defined by the **Industrial Alliance on Processors and Semiconductor Technologies (IAPST)**.
 
 It was developed for the **IAPST Stress Test Working Group** and supports:
 
-- Time-series querying of market capitalisation snapshots from **1965 to 2026**
-  with annual, quarterly, monthly, and weekly granularity
-- **Regional concentration analysis** across USA, China, Taiwan, South Korea,
-  Japan, and Rest of World
-- **Supply-chain cluster mapping** across 13 clusters covering the full
-  semiconductor value chain
+- Time-series querying of market capitalisation snapshots from **1965 to 2026** with annual, quarterly, monthly, and weekly granularity
+- **Regional concentration analysis** across USA, China, Taiwan, South Korea, Japan, and Rest of World
+- **Supply-chain cluster mapping** across 13 clusters covering the full semiconductor value chain
 - **Cluster-level market cap aggregation** using a proportion-weighted formula
 - **Semantic AI grounding** for semiconductor supply chain knowledge graphs
 
-> ⚠️ **Note:** This ontology represents the **base mapping layer only**.
-> It defines the semantic structure for data integration.
-> Data collection is conducted separately and mapped onto this ontology
-> using RML-based knowledge graph materialisation.
+> ⚠️ **Note:** This ontology represents the **base mapping layer only**. It defines the semantic structure for data integration. Data collection is conducted separately and mapped onto this ontology using RML-based knowledge graph materialisation.
 
 ---
 
@@ -154,25 +144,20 @@ owl:Thing
 
 ---
 
-```markdown
 ## 🗂️ Report Triple Structures
 
-The ontology uses a **reification pattern** for both report types, where each
-individual represents a single atomic observation tied to a company and a
-snapshot date. This allows companies operating across multiple clusters or
-regions to have multiple report individuals.
+The ontology uses a **reification pattern** for both report types, where each individual represents a single atomic observation tied to a company and a snapshot date. This allows companies operating across multiple clusters or regions to have multiple report individuals.
 
 ---
 
 ### Market_Capitalization
 
-Each `Market_Capitalization` individual represents a single
-**company–cluster–date** observation.
+Each `Market_Capitalization` individual represents a single **company–cluster–date** observation.
 
 ```
 Market_Capitalization_<Company>_<DD_MM_YYYY>_<Cluster>
-    ├── :reportsOnCompany                       → :Company   (Object Property)
-    ├── :reportsOnCluster                       → :Cluster   (Object Property)
+    ├── :reportsOnCompany                       → :Company    (Object Property)
+    ├── :reportsOnCluster                       → :Cluster    (Object Property)
     ├── :hasMarketCapitalizationValueBillionsUSD → xsd:decimal (Data Property)
     ├── :hasProportionInCluster                 → xsd:decimal (Data Property)
     └── :snapshotDate                           → xsd:string  (Data Property)
@@ -190,22 +175,15 @@ Market_Capitalization_<Company>_<DD_MM_YYYY>_<Cluster>
     :snapshotDate                            "31_12_2024"^^xsd:string .
 ```
 
-> Companies spanning **multiple clusters** will have **multiple separate
-> `Market_Capitalization` individuals**, one per cluster, with the constraint
-> that the sum of `hasProportionInCluster` values per company across all
-> clusters equals `1.0`.
+> Companies spanning **multiple clusters** will have **multiple separate `Market_Capitalization` individuals**, one per cluster, with the constraint that the sum of `hasProportionInCluster` values per company across all clusters equals `1.0`.
 >
-> ⚠️ **Why P is critical:** Many companies span multiple clusters
-> (e.g., Samsung is in both `Materials_Cluster` and
-> `Silicon_Foundry_Cluster`). Additionally, many companies are not
-> 100% semiconductors.
+> ⚠️ **Why P is critical:** Many companies span multiple clusters (e.g., Samsung is in both `Materials_Cluster` and `Silicon_Foundry_Cluster`). Additionally, many companies are not 100% semiconductors.
 
 ---
 
 ### Regional_Concentration
 
-Each `Regional_Concentration` individual represents a single
-**company–region–date** observation.
+Each `Regional_Concentration` individual represents a single **company–region–date** observation.
 
 ```
 Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
@@ -226,19 +204,15 @@ Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
     :snapshotDate             "31_12_2024"^^xsd:string .
 ```
 
-> Companies spanning **multiple regions** will have **multiple separate
-> `Regional_Concentration` individuals**, one per region, with the constraint
-> that the sum of `hasConcentrationInRegion` values per company across all
-> regions equals `1.0`.
+> Companies spanning **multiple regions** will have **multiple separate `Regional_Concentration` individuals**, one per region, with the constraint that the sum of `hasConcentrationInRegion` values per company across all regions equals `1.0`.
 >
-> ⚠️ **Why P is critical:** Many companies span multiple regions
-> (e.g., TSMC operates across Taiwan, USA, and Japan).
+> ⚠️ **Why P is critical:** Many companies span multiple regions (e.g., TSMC operates across Taiwan, USA, and Japan).
 
 ---
 
 ## 📐 Market Capitalisation Formulas
 
-**1. Market Capitalisation by Cluster**
+### 1. Market Capitalisation by Cluster
 
 ```
 MC_j = Σ (MC_i × P_ij)   for all companies i in Co
@@ -261,7 +235,7 @@ MC_T = Σ MC_j   summed across all clusters j = 1 to n
 
 ---
 
-**2. Market Capitalisation by Region**
+### 2. Market Capitalisation by Region
 
 ```
 MC_r = Σ (MC_i × P_ir)   for all companies i in Co
@@ -282,54 +256,40 @@ Total market capitalisation across all regions:
 MC_T = Σ MC_r   summed across all regions r = 1 to n
 ```
 
+---
+
 ## 🏢 Modelled Companies
 
-**Equipment:** ASML · ASM International · Applied Materials · Aixtron · KLA ·
-Lam Research · SUSS MicroTec · TRUMPF · Zeiss · Axelera AI
+**Equipment:** ASML · ASM International · Applied Materials · Aixtron · KLA · Lam Research · SUSS MicroTec · TRUMPF · Zeiss · Axelera AI
 
-**Fabless:** NVIDIA · AMD · Qualcomm · Broadcom · NXP · SiPearl · Realtek ·
-Will Semiconductor
+**Fabless:** NVIDIA · AMD · Qualcomm · Broadcom · NXP · SiPearl · Realtek · Will Semiconductor
 
-**Silicon Foundry / IDM Frontend:** TSMC · Intel · Samsung · GlobalFoundries ·
-SMIC · UMC · STMicroelectronics · Infineon · Texas Instruments · Analog Devices ·
-Micron · NXP · Bosch · Diodes Incorporated · Diotec Semiconductor ·
-Elmos Semiconductor · TMX · Vishay · X-Fab
+**Silicon Foundry / IDM Frontend:** TSMC · Intel · Samsung · GlobalFoundries · SMIC · UMC · STMicroelectronics · Infineon · Texas Instruments · Analog Devices · Micron · NXP · Bosch · Diodes Incorporated · Diotec Semiconductor · Elmos Semiconductor · TMX · Vishay · X-Fab
 
-**OSAT / IDM Backend:** ASE · STMicroelectronics · TSMC · Bosch ·
-Presto Engineering · STATS ChipPAC · Silicon Box · Swissbit
+**OSAT / IDM Backend:** ASE · STMicroelectronics · TSMC · Bosch · Presto Engineering · STATS ChipPAC · Silicon Box · Swissbit
 
-**Materials:** Air Liquide · Entegris · GlobalWafers · Siltronic · Soitec ·
-Tokyo Ohka Kogyo
+**Materials:** Air Liquide · Entegris · GlobalWafers · Siltronic · Soitec · Tokyo Ohka Kogyo
 
-**IP / EDA:** Arm · Cadence · Synopsys · Siemens · Celus · Codasip ·
-Defacto Technologies
+**IP / EDA:** Arm · Cadence · Synopsys · Siemens · Celus · Codasip · Defacto Technologies
 
-**Photonics:** Broadcom · Coherent Corp · GlobalFoundries · Hamamatsu Photonics ·
-SensL/onsemi · Soitec · Sony Semiconductor Solutions · STMicroelectronics ·
-VCSEL · X-Fab
+**Photonics:** Broadcom · Coherent Corp · GlobalFoundries · Hamamatsu Photonics · SensL/onsemi · Soitec · Sony Semiconductor Solutions · STMicroelectronics · VCSEL · X-Fab
 
-**Components:** Continental · HELLA · Murata · TDK · TE Connectivity · Valeo ·
-Vishay · Würth Elektronik · ZF · Samsung · Bosch
+**Components:** Continental · HELLA · Murata · TDK · TE Connectivity · Valeo · Vishay · Würth Elektronik · ZF · Samsung · Bosch
 
-**Applications:** Apple · BMW · Dell · Denso · HP · Hyundai Motor Group · Samsung ·
-Siemens · Stellantis · Volkswagen · Bosch
+**Applications:** Apple · BMW · Dell · Denso · HP · Hyundai Motor Group · Samsung · Siemens · Stellantis · Volkswagen · Bosch
 
-**EMS / ODM:** BYD Electronics · Cicor · Compal Electronics · Foxconn · GPV ·
-Quanta Computer · SANMINA-SCI Germany · Videoton · Zollner Elektronik ·
-cms electronics
+**EMS / ODM:** BYD Electronics · Cicor · Compal Electronics · Foxconn · GPV · Quanta Computer · SANMINA-SCI Germany · Videoton · Zollner Elektronik · cms electronics
 
-**R&D / Academia:** Imec · CEA-Leti / MINATEC · TU Dresden Ecosystem ·
-Tsinghua University · University of Twente
+**R&D / Academia:** Imec · CEA-Leti / MINATEC · TU Dresden Ecosystem · Tsinghua University · University of Twente
 
-**Associations & Others:** AENEAS · AESEMI · AKJ Automotive · BusinessEurope ·
-EPoSS · ESIA · INSIDE Industry Association · SEMI · SIA · ZVEI
+**Associations & Others:** AENEAS · AESEMI · AKJ Automotive · BusinessEurope · EPoSS · ESIA · INSIDE Industry Association · SEMI · SIA · ZVEI
 
 ---
 
 ## ⏱️ Temporal Coverage
 
 | Period | Granularity | Example Individuals |
-|--------|------------|---------------------|
+|--------|-------------|---------------------|
 | 1965 – 1994 | Annual (December 31) | `Instant_1965_12_31` … `Instant_1994_12_31` |
 | 1995 – 2020 | Quarterly (Mar, Jun, Sep, Dec) | `Instant_1995_03_31` … `Instant_2020_12_31` |
 | 2021 – 2025 | Monthly (end of month) | `Instant_2021_01_31` … `Instant_2025_12_31` |
@@ -352,11 +312,7 @@ EPoSS · ESIA · INSIDE Industry Association · SEMI · SIA · ZVEI
 
 ## 🔗 Supply Chain Flow Properties
 
-The ontology models directional flows between clusters using three symmetric
-property pairs:
-`flowsGoodsTo` ↔ `recievesGoodsFrom`,
-`flowsMoneyTo` ↔ `recievesMoneyFrom`,
-`flowsInformationTo` ↔ `recievesInformationFrom`.
+The ontology models directional flows between clusters using three symmetric property pairs: `flowsGoodsTo` ↔ `recievesGoodsFrom`, `flowsMoneyTo` ↔ `recievesMoneyFrom`, and `flowsInformationTo` ↔ `recievesInformationFrom`.
 
 ```
 Materials ──────────────────► SiFo/IDM Frontend
@@ -522,6 +478,4 @@ https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_bas
 | [WebVOWL (TIB)](https://service.tib.eu/webvowl/) | Interactive ontology visualisation |
 | [Zenodo](https://zenodo.org/) | Persistent DOI and archival |
 
-_Developed for the Industrial Alliance on Processors and Semiconductor Technologies
-(IAPST) — Stress Test Working Group._
-```
+_Developed for the Industrial Alliance on Processors and Semiconductor Technologies (IAPST) — Stress Test Working Group._
