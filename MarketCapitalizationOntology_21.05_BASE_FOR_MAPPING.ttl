@@ -1,0 +1,2203 @@
+@prefix : <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@base <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/> .
+
+<http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology> rdf:type owl:Ontology ;
+                                                                                          rdfs:comment """Ontology Mapping the Semiconductor Supply Chain Assumptions used within the Work of the Industrial Alliance on Processors and Semiconductor Technologies.
+Integration of Semiconductor Industry Market Capitalization for Stress Test Working Group.""" ;
+                                                                                          rdfs:isDefinedBy """Yannic Schlosser (GSD SID IN)
+Christine O'Brien (GSD SID IN)""" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2006/time#inXSDDateTimeStamp
+time:inXSDDateTimeStamp rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/flowsGoodsTo
+:flowsGoodsTo rdf:type owl:ObjectProperty ;
+              owl:inverseOf :recievesGoodsFrom ;
+              rdfs:domain :Cluster ;
+              rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/flowsInformationTo
+:flowsInformationTo rdf:type owl:ObjectProperty ;
+                    owl:inverseOf :recievesInformationFrom ;
+                    rdfs:domain :Cluster ;
+                    rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/flowsMoneyTo
+:flowsMoneyTo rdf:type owl:ObjectProperty ;
+              owl:inverseOf :recievesMoneyFrom ;
+              rdfs:domain :Cluster ;
+              rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/hasCompany
+:hasCompany rdf:type owl:ObjectProperty ;
+            owl:inverseOf :isInCluster ;
+            rdfs:domain :Cluster ;
+            rdfs:range :Company .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/hasHeadquartersIn
+:hasHeadquartersIn rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Organisation ;
+                   rdfs:range :Region ;
+                   rdfs:comment "Associates an Organisation (e.g. Company) with the Region in which its corporate headquarters are located. Enables regional aggregation of market capitalization and supply-chain exposure." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/isInCluster
+:isInCluster rdf:type owl:ObjectProperty ;
+             rdfs:domain :Company ;
+             rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/recievesGoodsFrom
+:recievesGoodsFrom rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Cluster ;
+                   rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/recievesInformationFrom
+:recievesInformationFrom rdf:type owl:ObjectProperty ;
+                         rdfs:domain :Cluster ;
+                         rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/recievesMoneyFrom
+:recievesMoneyFrom rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Cluster ;
+                   rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/reportsOnCluster
+:reportsOnCluster rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Market_Capitalization ;
+                  rdfs:range :Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/reportsOnCompany
+:reportsOnCompany rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Market_Capitalization ;
+                  rdfs:range :Company .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/reportsOnRegion
+:reportsOnRegion rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Regional_Concentration ;
+                 rdfs:range :Region ;
+                 rdfs:comment "Links a Regional_Concentration report to the Region it characterises (e.g. share of global market capitalization or supply-chain capacity attributed to that Region)." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/snapshotDate
+:snapshotDate rdf:type owl:ObjectProperty ;
+              rdfs:domain :Market_Capitalization .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/hasMarketCapitalizationValueBillionsUSD
+:hasMarketCapitalizationValueBillionsUSD rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain :Market_Capitalization ;
+                                         rdfs:range xsd:decimal .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/hasProportionInCluster
+:hasProportionInCluster rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :Market_Capitalization ;
+                        rdfs:range xsd:decimal .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology#China
+:China rdf:type owl:Class ;
+       rdfs:subClassOf :Region .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology#Japan
+:Japan rdf:type owl:Class ;
+       rdfs:subClassOf :Region .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology#Other
+:Other rdf:type owl:Class ;
+       rdfs:subClassOf :Region .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology#South_Korea
+:South_Korea rdf:type owl:Class ;
+             rdfs:subClassOf :Region .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology#Taiwan
+:Taiwan rdf:type owl:Class ;
+        rdfs:subClassOf :Region .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology#USA
+:USA rdf:type owl:Class ;
+     rdfs:subClassOf :Region .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Applications_Cluster
+:Applications_Cluster rdf:type owl:Class ;
+                      rdfs:subClassOf :Customer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Associations_and_Others_Cluster
+:Associations_and_Others_Cluster rdf:type owl:Class ;
+                                 rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Cluster
+:Cluster rdf:type owl:Class ;
+         rdfs:comment "Top-level class representing a grouping of organisations (typically companies) that share a common role, function, or position within the semiconductor supply chain or its surrounding ecosystem. Subclasses partition the ecosystem into supply-chain segments (Industrial_Alliance_Supply_Chain_Cluster) and downstream customer segments (Customer_Cluster)." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Company
+:Company rdf:type owl:Class ;
+         rdfs:subClassOf :Organisation ;
+         rdfs:comment "A commercial Organisation (legal entity) that participates in the semiconductor value chain, either as a supplier within the Industrial Alliance supply chain or as a downstream customer. A Company is assigned to one or more Clusters via the isInCluster property and is the subject of Market_Capitalization reports." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Components_Cluster
+:Components_Cluster rdf:type owl:Class ;
+                    rdfs:subClassOf :Customer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Customer_Cluster
+:Customer_Cluster rdf:type owl:Class ;
+                  rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster
+:Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster rdf:type owl:Class ;
+                                                                            rdfs:subClassOf :Customer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Equipment_Cluster
+:Equipment_Cluster rdf:type owl:Class ;
+                   rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Fabless_Cluster
+:Fabless_Cluster rdf:type owl:Class ;
+                 rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Industrial_Alliance_Supply_Chain_Cluster
+:Industrial_Alliance_Supply_Chain_Cluster rdf:type owl:Class ;
+                                          rdfs:subClassOf :Cluster ;
+                                          rdfs:comment "A Cluster representing one of the segments of the semiconductor supply chain as defined by the Industrial Alliance on Processors and Semiconductor Technologies. Subclasses cover the full upstream value chain (e.g. Materials, Equipment, IP/EDA, Fabless, Silicon Foundry/IDM Frontend, OSAT/IDM Backend, Photonics, R&D/Academia, Associations) as well as downstream Customer_Cluster segments." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Intellectual_Property_and_Electronic_Design_Automation_Cluster
+:Intellectual_Property_and_Electronic_Design_Automation_Cluster rdf:type owl:Class ;
+                                                                rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Market_Capitalization
+:Market_Capitalization rdf:type owl:Class ;
+                       rdfs:subClassOf :Report ;
+                       rdfs:comment """MC_j = SUM over i in Co of (P_ij * MC_i).
+MC_i = hasMarketCapitalizationValueUSD on this individual.
+P_ij = hasProportionInCluster on this individual (preliminary assumption, to be refined).
+Co = all Company individuals. Sum of hasProportionInCluster per company across all clusters = 1.0.""" .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Materials_Cluster
+:Materials_Cluster rdf:type owl:Class ;
+                   rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Organisation
+:Organisation rdf:type owl:Class ;
+              rdfs:comment "A legal or institutional entity (e.g. company, association, research institute, public body) that can participate in the semiconductor ecosystem. Serves as the superclass of Company and provides a generic anchor for any organisational actor referenced in the ontology." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster
+:Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster rdf:type owl:Class ;
+                                                                                               rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Photonics_Cluster
+:Photonics_Cluster rdf:type owl:Class ;
+                   rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Region
+:Region rdf:type owl:Class ;
+        rdfs:comment "A geographic area (typically a country or country group) used to localise actors and aggregate market data within the semiconductor ecosystem. Subclasses cover the regions most relevant to semiconductor market capitalization analysis: USA, China, Taiwan, South_Korea, Japan, and Other. Linked to Organisation via hasHeadquartersIn and to Regional_Concentration via reportsOnRegion." .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Regional_Concentration
+:Regional_Concentration rdf:type owl:Class ;
+                        rdfs:subClassOf :Report .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Report
+:Report rdf:type owl:Class ;
+        rdfs:comment "Top-level class for market analysis reports. Subclass: Market_Capitalization " .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster
+:Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster rdf:type owl:Class ;
+                                                                     rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster
+<http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> rdf:type owl:Class ;
+                                                                                                                                     rdfs:subClassOf :Industrial_Alliance_Supply_Chain_Cluster .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/AENEAS
+:AENEAS rdf:type owl:NamedIndividual ;
+        :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/AESEMI
+:AESEMI rdf:type owl:NamedIndividual ;
+        :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/AKJ_Automotive
+:AKJ_Automotive rdf:type owl:NamedIndividual ;
+                :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/AMD
+:AMD rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Fabless_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/ASE
+:ASE rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/ASML
+:ASML rdf:type owl:NamedIndividual ,
+               :Company ;
+      :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/ASM_International
+:ASM_International rdf:type owl:NamedIndividual ,
+                            :Company ;
+                   :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Advantest
+:Advantest rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Air_Liquide
+:Air_Liquide rdf:type owl:NamedIndividual ,
+                      :Company ;
+             :isInCluster :Materials_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Aixtron
+:Aixtron rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Analog_Devices
+:Analog_Devices rdf:type owl:NamedIndividual ,
+                         :Company ;
+                :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Apple
+:Apple rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Applications_Cluster
+:Applications_Cluster rdf:type owl:NamedIndividual ,
+                               :Applications_Cluster ;
+                      :flowsInformationTo :Customer_Cluster ;
+                      :flowsMoneyTo :Customer_Cluster ;
+                      :recievesGoodsFrom :Customer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Applied_Materials
+:Applied_Materials rdf:type owl:NamedIndividual ,
+                            :Company ;
+                   :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Arm
+:Arm rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Arm_Holdings
+:Arm_Holdings rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Associations_and_Others_Cluster
+:Associations_and_Others_Cluster rdf:type owl:NamedIndividual ,
+                                          :Associations_and_Others_Cluster ;
+                                 :flowsMoneyTo :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ;
+                                 :recievesInformationFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ;
+                                 :recievesMoneyFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Axelera_AI
+:Axelera_AI rdf:type owl:NamedIndividual ,
+                     :Company ;
+            :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/BMW
+:BMW rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/BYD_Electronics
+:BYD_Electronics rdf:type owl:NamedIndividual ,
+                          :Company ;
+                 :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Bosch
+:Bosch rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Applications_Cluster ,
+                    :Components_Cluster ,
+                    :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                    :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Broadcom
+:Broadcom rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Fabless_Cluster ,
+                       :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/BusinessEurope
+:BusinessEurope rdf:type owl:NamedIndividual ,
+                         :Company ;
+                :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Cadence
+:Cadence rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Cambricon_Technology
+:Cambricon_Technology rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Celus
+:Celus rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/China
+:China rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Cicor
+:Cicor rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Codasip
+:Codasip rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Coherent_Corp
+:Coherent_Corp rdf:type owl:NamedIndividual ,
+                        :Company ;
+               :isInCluster :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Compal_Electronics
+:Compal_Electronics rdf:type owl:NamedIndividual ,
+                             :Company ;
+                    :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Components_Cluster
+:Components_Cluster rdf:type owl:NamedIndividual ,
+                             :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Continental
+:Continental rdf:type owl:NamedIndividual ,
+                      :Company ;
+             :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Customer_Cluster
+:Customer_Cluster rdf:type owl:NamedIndividual ,
+                           :Customer_Cluster ;
+                  :flowsGoodsTo :Applications_Cluster ;
+                  :flowsInformationTo :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                      :Photonics_Cluster ;
+                  :flowsMoneyTo :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                :Photonics_Cluster ;
+                  :recievesGoodsFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                     :Photonics_Cluster ;
+                  :recievesInformationFrom :Applications_Cluster ;
+                  :recievesMoneyFrom :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Defacto_Technologies
+:Defacto_Technologies rdf:type owl:NamedIndividual ,
+                               :Company ;
+                      :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Dell
+:Dell rdf:type owl:NamedIndividual ,
+               :Company ;
+      :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Denso
+:Denso rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Diodes_Incorporated
+:Diodes_Incorporated rdf:type owl:NamedIndividual ,
+                              :Company ;
+                     :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Diotec_Semiconductor
+:Diotec_Semiconductor rdf:type owl:NamedIndividual ,
+                               :Company ;
+                      :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/EPoSS
+:EPoSS rdf:type owl:NamedIndividual ;
+       :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/ESIA
+:ESIA rdf:type owl:NamedIndividual ;
+      :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster
+:Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster rdf:type owl:NamedIndividual ,
+                                                                                     :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Elmos_Semiconductor
+:Elmos_Semiconductor rdf:type owl:NamedIndividual ,
+                              :Company ;
+                     :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Entegris
+:Entegris rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Materials_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Equipment_Cluster
+:Equipment_Cluster rdf:type owl:NamedIndividual ,
+                            :Equipment_Cluster ;
+                   :flowsGoodsTo :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                 :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                   :recievesInformationFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                            :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                   :recievesMoneyFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                      :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Europe
+:Europe rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Fabless_Cluster
+:Fabless_Cluster rdf:type owl:NamedIndividual ,
+                          :Fabless_Cluster ;
+                 :flowsGoodsTo :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                 :flowsInformationTo :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                 :flowsMoneyTo :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                 :recievesGoodsFrom :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                 :recievesInformationFrom :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                 :recievesMoneyFrom :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Foxconn
+:Foxconn rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Fraunhofer
+:Fraunhofer rdf:type owl:NamedIndividual ;
+            :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/GPV
+:GPV rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/GlobalFoundries
+:GlobalFoundries rdf:type owl:NamedIndividual ,
+                          :Company ;
+                 :isInCluster :Photonics_Cluster ,
+                              :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/GlobalWafers
+:GlobalWafers rdf:type owl:NamedIndividual ,
+                       :Company ;
+              :isInCluster :Materials_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/HELLA
+:HELLA rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/HP
+:HP rdf:type owl:NamedIndividual ,
+             :Company ;
+    :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Hamamatsu_Photonics
+:Hamamatsu_Photonics rdf:type owl:NamedIndividual ,
+                              :Company ;
+                     :isInCluster :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Huawei
+:Huawei rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Hyundai_Motor_Group
+:Hyundai_Motor_Group rdf:type owl:NamedIndividual ,
+                              :Company ;
+                     :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/INSIDE_Industry_Association
+:INSIDE_Industry_Association rdf:type owl:NamedIndividual ;
+                             :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Imec
+:Imec rdf:type owl:NamedIndividual ;
+      :isInCluster <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Infineon
+:Infineon rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1965_12_31
+:Instant_1965_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1965-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1966_12_31
+:Instant_1966_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1966-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1967_12_31
+:Instant_1967_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1967-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1968_12_31
+:Instant_1968_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1968-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1969_12_31
+:Instant_1969_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1969-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1970_12_31
+:Instant_1970_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1970-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1971_12_31
+:Instant_1971_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1971-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1972_12_31
+:Instant_1972_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1972-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1973_12_31
+:Instant_1973_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1973-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1974_12_31
+:Instant_1974_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1974-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1975_12_31
+:Instant_1975_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1975-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1976_12_31
+:Instant_1976_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1976-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1977_12_31
+:Instant_1977_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1977-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1978_12_31
+:Instant_1978_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1978-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1979_12_31
+:Instant_1979_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1979-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1980_12_31
+:Instant_1980_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1980-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1981_12_31
+:Instant_1981_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1981-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1982_12_31
+:Instant_1982_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1982-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1983_12_31
+:Instant_1983_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1983-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1984_12_31
+:Instant_1984_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1984-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1985_12_31
+:Instant_1985_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1985-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1986_12_31
+:Instant_1986_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1986-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1987_12_31
+:Instant_1987_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1987-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1988_12_31
+:Instant_1988_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1988-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1989_12_31
+:Instant_1989_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1989-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1990_12_31
+:Instant_1990_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1990-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1991_12_31
+:Instant_1991_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1991-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1992_12_31
+:Instant_1992_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1992-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1993_12_31
+:Instant_1993_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1993-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1994_12_31
+:Instant_1994_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1994-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1995_03_31
+:Instant_1995_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1995-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1995_06_30
+:Instant_1995_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1995-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1995_09_30
+:Instant_1995_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1995-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1995_12_31
+:Instant_1995_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1995-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1996_03_31
+:Instant_1996_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1996-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1996_06_30
+:Instant_1996_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1996-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1996_09_30
+:Instant_1996_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1996-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1996_12_31
+:Instant_1996_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1996-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1997_03_31
+:Instant_1997_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1997-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1997_06_30
+:Instant_1997_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1997-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1997_09_30
+:Instant_1997_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1997-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1997_12_31
+:Instant_1997_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1997-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1998_03_31
+:Instant_1998_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1998-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1998_06_30
+:Instant_1998_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1998-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1998_09_30
+:Instant_1998_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1998-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1998_12_31
+:Instant_1998_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1998-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1999_03_31
+:Instant_1999_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1999-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1999_06_30
+:Instant_1999_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1999-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1999_09_30
+:Instant_1999_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1999-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_1999_12_31
+:Instant_1999_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "1999-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2000_03_31
+:Instant_2000_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2000-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2000_06_30
+:Instant_2000_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2000-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2000_09_30
+:Instant_2000_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2000-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2000_12_31
+:Instant_2000_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2000-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2001_03_31
+:Instant_2001_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2001-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2001_06_30
+:Instant_2001_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2001-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2001_09_30
+:Instant_2001_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2001-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2001_12_31
+:Instant_2001_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2001-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2002_03_31
+:Instant_2002_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2002-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2002_06_30
+:Instant_2002_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2002-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2002_09_30
+:Instant_2002_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2002-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2002_12_31
+:Instant_2002_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2002-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2003_03_31
+:Instant_2003_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2003-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2003_06_30
+:Instant_2003_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2003-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2003_09_30
+:Instant_2003_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2003-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2003_12_31
+:Instant_2003_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2003-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2004_03_31
+:Instant_2004_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2004-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2004_06_30
+:Instant_2004_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2004-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2004_09_30
+:Instant_2004_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2004-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2004_12_31
+:Instant_2004_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2004-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2005_03_31
+:Instant_2005_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2005-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2005_06_30
+:Instant_2005_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2005-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2005_09_30
+:Instant_2005_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2005-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2005_12_31
+:Instant_2005_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2005-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2006_03_31
+:Instant_2006_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2006-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2006_06_30
+:Instant_2006_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2006-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2006_09_30
+:Instant_2006_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2006-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2006_12_31
+:Instant_2006_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2006-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2007_03_31
+:Instant_2007_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2007-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2007_06_30
+:Instant_2007_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2007-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2007_09_30
+:Instant_2007_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2007-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2007_12_31
+:Instant_2007_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2007-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2008_03_31
+:Instant_2008_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2008-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2008_06_30
+:Instant_2008_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2008-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2008_09_30
+:Instant_2008_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2008-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2008_12_31
+:Instant_2008_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2008-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2009_03_31
+:Instant_2009_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2009-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2009_06_30
+:Instant_2009_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2009-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2009_09_30
+:Instant_2009_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2009-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2009_12_31
+:Instant_2009_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2009-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2010_03_31
+:Instant_2010_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2010-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2010_06_30
+:Instant_2010_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2010-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2010_09_30
+:Instant_2010_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2010-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2010_12_31
+:Instant_2010_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2010-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2011_03_31
+:Instant_2011_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2011-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2011_06_30
+:Instant_2011_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2011-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2011_09_30
+:Instant_2011_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2011-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2011_12_31
+:Instant_2011_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2011-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2012_03_31
+:Instant_2012_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2012-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2012_06_30
+:Instant_2012_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2012-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2012_09_30
+:Instant_2012_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2012-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2012_12_31
+:Instant_2012_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2012-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2013_03_31
+:Instant_2013_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2013-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2013_06_30
+:Instant_2013_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2013-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2013_09_30
+:Instant_2013_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2013-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2013_12_31
+:Instant_2013_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2013-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2014_03_31
+:Instant_2014_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2014-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2014_06_30
+:Instant_2014_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2014-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2014_09_30
+:Instant_2014_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2014-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2014_12_31
+:Instant_2014_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2014-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2015_03_31
+:Instant_2015_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2015-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2015_06_30
+:Instant_2015_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2015-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2015_09_30
+:Instant_2015_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2015-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2015_12_31
+:Instant_2015_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2015-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2016_03_31
+:Instant_2016_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2016-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2016_06_30
+:Instant_2016_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2016-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2016_09_30
+:Instant_2016_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2016-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2016_12_31
+:Instant_2016_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2016-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2017_03_31
+:Instant_2017_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2017-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2017_06_30
+:Instant_2017_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2017-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2017_09_30
+:Instant_2017_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2017-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2017_12_31
+:Instant_2017_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2017-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2018_03_31
+:Instant_2018_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2018-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2018_06_30
+:Instant_2018_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2018-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2018_09_30
+:Instant_2018_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2018-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2018_12_31
+:Instant_2018_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2018-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2019_03_31
+:Instant_2019_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2019-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2019_06_30
+:Instant_2019_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2019-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2019_09_30
+:Instant_2019_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2019-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2019_12_31
+:Instant_2019_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2019-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2020_03_31
+:Instant_2020_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2020-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2020_06_30
+:Instant_2020_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2020-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2020_09_30
+:Instant_2020_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2020-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2020_12_31
+:Instant_2020_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2020-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_01_31
+:Instant_2021_01_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-01-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_02_28
+:Instant_2021_02_28 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-02-28T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_03_31
+:Instant_2021_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_04_30
+:Instant_2021_04_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-04-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_05_31
+:Instant_2021_05_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-05-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_06_30
+:Instant_2021_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_07_31
+:Instant_2021_07_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-07-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_08_31
+:Instant_2021_08_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-08-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_09_30
+:Instant_2021_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_10_31
+:Instant_2021_10_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-10-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_11_30
+:Instant_2021_11_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-11-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2021_12_31
+:Instant_2021_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2021-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_01_31
+:Instant_2022_01_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-01-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_02_28
+:Instant_2022_02_28 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-02-28T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_03_31
+:Instant_2022_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_04_30
+:Instant_2022_04_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-04-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_05_31
+:Instant_2022_05_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-05-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_06_30
+:Instant_2022_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_07_31
+:Instant_2022_07_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-07-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_08_31
+:Instant_2022_08_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-08-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_09_30
+:Instant_2022_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_10_31
+:Instant_2022_10_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-10-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_11_30
+:Instant_2022_11_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-11-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2022_12_31
+:Instant_2022_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2022-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_01_31
+:Instant_2023_01_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-01-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_02_28
+:Instant_2023_02_28 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-02-28T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_03_31
+:Instant_2023_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_04_30
+:Instant_2023_04_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-04-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_05_31
+:Instant_2023_05_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-05-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_06_30
+:Instant_2023_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_07_31
+:Instant_2023_07_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-07-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_08_31
+:Instant_2023_08_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-08-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_09_30
+:Instant_2023_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_10_31
+:Instant_2023_10_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-10-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_11_30
+:Instant_2023_11_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-11-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2023_12_31
+:Instant_2023_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2023-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_01_31
+:Instant_2024_01_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-01-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_02_29
+:Instant_2024_02_29 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-02-29T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_03_31
+:Instant_2024_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_04_30
+:Instant_2024_04_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-04-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_05_31
+:Instant_2024_05_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-05-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_06_30
+:Instant_2024_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_07_31
+:Instant_2024_07_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-07-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_08_31
+:Instant_2024_08_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-08-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_09_30
+:Instant_2024_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_10_31
+:Instant_2024_10_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-10-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_11_30
+:Instant_2024_11_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-11-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2024_12_31
+:Instant_2024_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2024-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_01_31
+:Instant_2025_01_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-01-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_02_28
+:Instant_2025_02_28 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-02-28T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_03_31
+:Instant_2025_03_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-03-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_04_30
+:Instant_2025_04_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-04-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_05_31
+:Instant_2025_05_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-05-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_06_30
+:Instant_2025_06_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-06-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_07_31
+:Instant_2025_07_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-07-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_08_31
+:Instant_2025_08_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-08-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_09_30
+:Instant_2025_09_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-09-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_10_31
+:Instant_2025_10_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-10-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_11_30
+:Instant_2025_11_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-11-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2025_12_31
+:Instant_2025_12_31 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2025-12-31T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_01_02
+:Instant_2026_01_02 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-01-02T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_01_09
+:Instant_2026_01_09 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-01-09T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_01_16
+:Instant_2026_01_16 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-01-16T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_01_23
+:Instant_2026_01_23 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-01-23T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_01_30
+:Instant_2026_01_30 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-01-30T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_02_06
+:Instant_2026_02_06 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-02-06T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_02_13
+:Instant_2026_02_13 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-02-13T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_02_20
+:Instant_2026_02_20 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-02-20T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_02_27
+:Instant_2026_02_27 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-02-27T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_03_06
+:Instant_2026_03_06 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-03-06T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_03_13
+:Instant_2026_03_13 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-03-13T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_03_20
+:Instant_2026_03_20 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-03-20T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_03_27
+:Instant_2026_03_27 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-03-27T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_04_03
+:Instant_2026_04_03 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-04-03T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_04_10
+:Instant_2026_04_10 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-04-10T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_04_17
+:Instant_2026_04_17 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-04-17T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_04_24
+:Instant_2026_04_24 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-04-24T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Instant_2026_05_01
+:Instant_2026_05_01 rdf:type owl:NamedIndividual ;
+                    time:inXSDDateTimeStamp "2026-05-01T00:00:00Z"^^xsd:dateTimeStamp .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Intel
+:Intel rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Intellectual_Property_and_Electronic_Design_Automation_Cluster
+:Intellectual_Property_and_Electronic_Design_Automation_Cluster rdf:type owl:NamedIndividual ,
+                                                                         :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                                                                :flowsGoodsTo :Fabless_Cluster ,
+                                                                              :Photonics_Cluster ,
+                                                                              <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> ;
+                                                                :flowsInformationTo :Fabless_Cluster ,
+                                                                                    :Photonics_Cluster ,
+                                                                                    :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                :flowsMoneyTo :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                :recievesGoodsFrom :Fabless_Cluster ,
+                                                                                   :Photonics_Cluster ,
+                                                                                   :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                :recievesInformationFrom :Fabless_Cluster ,
+                                                                                         :Photonics_Cluster ,
+                                                                                         :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                :recievesMoneyFrom :Fabless_Cluster ,
+                                                                                   :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Japan
+:Japan rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/KLA
+:KLA rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Lam_Research
+:Lam_Research rdf:type owl:NamedIndividual ,
+                       :Company ;
+              :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Marvell_Technology
+:Marvell_Technology rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Materials_Cluster
+:Materials_Cluster rdf:type owl:NamedIndividual ,
+                            :Materials_Cluster ;
+                   :flowsGoodsTo :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                 :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                   :recievesInformationFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                            :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                   :recievesMoneyFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                      :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/MediaTek
+:MediaTek rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Micron
+:Micron rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Micron_Technology
+:Micron_Technology rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Murata
+:Murata rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/NVIDIA
+:NVIDIA rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :isInCluster :Fabless_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/NXP
+:NXP rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Fabless_Cluster ,
+                  :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Naura_Technology
+:Naura_Technology rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Other
+:Other rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster
+:Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster rdf:type owl:NamedIndividual ,
+                                                                                                        :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ;
+                                                                                               :flowsGoodsTo :Customer_Cluster ;
+                                                                                               :flowsInformationTo :Equipment_Cluster ,
+                                                                                                                   :Materials_Cluster ,
+                                                                                                                   :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                                               :flowsMoneyTo :Associations_and_Others_Cluster ,
+                                                                                                             :Equipment_Cluster ,
+                                                                                                             :Materials_Cluster ;
+                                                                                               :recievesGoodsFrom :Equipment_Cluster ,
+                                                                                                                  :Materials_Cluster ,
+                                                                                                                  :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                                               :recievesInformationFrom :Associations_and_Others_Cluster ,
+                                                                                                                        :Customer_Cluster ;
+                                                                                               :recievesMoneyFrom :Associations_and_Others_Cluster ,
+                                                                                                                  :Customer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Photonics_Cluster
+:Photonics_Cluster rdf:type owl:NamedIndividual ,
+                            :Photonics_Cluster ;
+                   :flowsGoodsTo :Customer_Cluster ;
+                   :flowsInformationTo :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                   :flowsMoneyTo :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                   :recievesGoodsFrom :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                   :recievesInformationFrom :Customer_Cluster ;
+                   :recievesMoneyFrom :Customer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Presto_Engineering
+:Presto_Engineering rdf:type owl:NamedIndividual ,
+                             :Company ;
+                    :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Qualcomm
+:Qualcomm rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Fabless_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Quanta_Computer
+:Quanta_Computer rdf:type owl:NamedIndividual ,
+                          :Company ;
+                 :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Realtek
+:Realtek rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Fabless_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SANMINA-SCI_Germany
+:SANMINA-SCI_Germany rdf:type owl:NamedIndividual ,
+                              :Company ;
+                     :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SEMI
+:SEMI rdf:type owl:NamedIndividual ;
+      :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SIA
+:SIA rdf:type owl:NamedIndividual ;
+     :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SK_Hynix
+:SK_Hynix rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SMIC
+:SMIC rdf:type owl:NamedIndividual ,
+               :Company ;
+      :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/STATS_ChipPAC
+:STATS_ChipPAC rdf:type owl:NamedIndividual ,
+                        :Company ;
+               :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/STMicroelectronics
+:STMicroelectronics rdf:type owl:NamedIndividual ,
+                             :Company ;
+                    :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                                 :Photonics_Cluster ,
+                                 :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SUSS_MicroTec
+:SUSS_MicroTec rdf:type owl:NamedIndividual ,
+                        :Company ;
+               :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Samsung
+:Samsung rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Applications_Cluster ,
+                      :Components_Cluster ,
+                      :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SensL_onsemi
+:SensL_onsemi rdf:type owl:NamedIndividual ,
+                       :Company ;
+              :isInCluster :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/SiPearl
+:SiPearl rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Fabless_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Siemens
+:Siemens rdf:type owl:NamedIndividual ,
+                  :Company ;
+         :isInCluster :Applications_Cluster ,
+                      :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Silicon_Box
+:Silicon_Box rdf:type owl:NamedIndividual ,
+                      :Company ;
+             :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster
+:Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster rdf:type owl:NamedIndividual ,
+                                                                              :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster ;
+                                                                     :flowsGoodsTo :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ;
+                                                                     :flowsInformationTo :Fabless_Cluster ,
+                                                                                         :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                                                                     :flowsMoneyTo :Fabless_Cluster ,
+                                                                                   :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                                                                     :recievesGoodsFrom :Fabless_Cluster ,
+                                                                                        :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                                                                     :recievesInformationFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ;
+                                                                     :recievesMoneyFrom :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Siltronic
+:Siltronic rdf:type owl:NamedIndividual ,
+                    :Company ;
+           :isInCluster :Materials_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Soitec
+:Soitec rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :isInCluster :Materials_Cluster ,
+                     :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Sony_Semiconductor_Solutions
+:Sony_Semiconductor_Solutions rdf:type owl:NamedIndividual ,
+                                       :Company ;
+                              :isInCluster :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/South_Korea
+:South_Korea rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Stellantis
+:Stellantis rdf:type owl:NamedIndividual ,
+                     :Company ;
+            :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Swissbit
+:Swissbit rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Synopsys
+:Synopsys rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/TDK
+:TDK rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/TE_Connectivity
+:TE_Connectivity rdf:type owl:NamedIndividual ,
+                          :Company ;
+                 :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/TMX
+:TMX rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/TRUMPF
+:TRUMPF rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/TSMC
+:TSMC rdf:type owl:NamedIndividual ,
+               :Company ;
+      :isInCluster :Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster ,
+                   :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/TU_Dresden_Ecosystem
+:TU_Dresden_Ecosystem rdf:type owl:NamedIndividual ;
+                      :isInCluster <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> ;
+                      rdfs:comment "Leaders in hafnium-oxide ferroelectric devices and emerging memories" .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Taiwan
+:Taiwan rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Texas_Instruments
+:Texas_Instruments rdf:type owl:NamedIndividual ,
+                            :Company ;
+                   :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Tokyo_Electron
+:Tokyo_Electron rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Tokyo_Ohka_Kogyo
+:Tokyo_Ohka_Kogyo rdf:type owl:NamedIndividual ,
+                           :Company ;
+                  :isInCluster :Materials_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Tsinghua_University
+:Tsinghua_University rdf:type owl:NamedIndividual ;
+                     :isInCluster <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/UMC
+:UMC rdf:type owl:NamedIndividual ,
+              :Company ;
+     :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/USA
+:USA rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/University_of_Twente
+:University_of_Twente rdf:type owl:NamedIndividual ;
+                      :isInCluster <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/VCSEL
+:VCSEL rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Photonics_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Valeo
+:Valeo rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Videoton
+:Videoton rdf:type owl:NamedIndividual ,
+                   :Company ;
+          :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Vishay
+:Vishay rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :isInCluster :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Volkswagen
+:Volkswagen rdf:type owl:NamedIndividual ,
+                     :Company ;
+            :isInCluster :Applications_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Will_Semiconductor
+:Will_Semiconductor rdf:type owl:NamedIndividual ,
+                             :Company ;
+                    :isInCluster :Fabless_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Würth_Elektronik
+:Würth_Elektronik rdf:type owl:NamedIndividual ,
+                           :Company ;
+                  :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/X-Fab
+:X-Fab rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Photonics_Cluster ,
+                    :Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/YMTC
+:YMTC rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/ZF
+:ZF rdf:type owl:NamedIndividual ,
+             :Company ;
+    :isInCluster :Components_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/ZVEI
+:ZVEI rdf:type owl:NamedIndividual ;
+      :isInCluster :Associations_and_Others_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Zeiss
+:Zeiss rdf:type owl:NamedIndividual ,
+                :Company ;
+       :isInCluster :Equipment_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Zollner_Elektronik
+:Zollner_Elektronik rdf:type owl:NamedIndividual ,
+                             :Company ;
+                    :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/cms_electronics
+:cms_electronics rdf:type owl:NamedIndividual ,
+                          :Company ;
+                 :isInCluster :Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/CEA-Leti_/_MINATEC
+<http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/CEA-Leti_/_MINATEC> rdf:type owl:NamedIndividual ;
+                                                                                                            :isInCluster <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> .
+
+
+###  http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster
+<http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> rdf:type owl:NamedIndividual ,
+                                                                                                                                              <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> ;
+                                                                                                                                     :flowsGoodsTo :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                                                                                                                                     :recievesInformationFrom :Intellectual_Property_and_Electronic_Design_Automation_Cluster ;
+                                                                                                                                     :recievesMoneyFrom :Intellectual_Property_and_Electronic_Design_Automation_Cluster .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:Applications_Cluster rdfs:comment "Cluster Applications - Downstream system makers and service operators that integrate semiconductors into end-products and platforms—smartphones/PCs, cloud & AI data centers, automobiles, industrial automation, and connected devices. Their product roadmaps and capex set the demand signal for chips across logic, memory, analog, Radio Frequency (RF), power, and optics" .
+
+
+:Associations_and_Others_Cluster rdfs:comment "Cluster Others - A cross-cutting set of themes that shape disruption and growth across the entire semiconductor supply chain—above any single tier (materials, equipment, fab, OSAT). It consolidates systemic risks and opportunities. The cluster’s purpose is to track leading indicators and translate them into playbooks for mitigation and investment." .
+
+
+:Components_Cluster rdfs:comment "Cluster Components - Companies that supply non-semiconductor electro-mechanical and passive building blocks used on and around PCBs and within system wiring: passives (capacitors, resistors, inductors); interconnects and electromechanical (gconnectors, sockets, switches, cable/wire harnesses, terminals); EMI/EMC and power components (EMI filters, ferrites, bus bars, power connectors, protection); and related sensors/controls" .
+
+
+:Customer_Cluster rdfs:comment "A Cluster representing downstream consumers of semiconductor products. Customer_Cluster groups together organisations that integrate semiconductor components into higher-level products or systems. Subclasses include Applications_Cluster, Components_Cluster, and Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster." .
+
+
+:Electronic_Manufacturing_Services_and_Original_Design_Manufacturer_Cluster rdfs:comment "Cluster EMS/ODM - EMS/ODM partners design, source, assemble, and test electronics—from PCBAs and modules to full systems—for brand-name OEMs; EMS focuses on manufacturing/operations, while ODMs additionally own product designs that customers rebrand. These firms drive NPI/DFx, global supply chains, and box-build integration" .
+
+
+:Equipment_Cluster rdfs:comment "Cluster Equipment - Semiconductor equipment covers the capital tools that make, inspect, assemble, and test chips—lithography scanners, deposition and etch tools, cleaning, metrology & inspection, vacuum/abatement, and automated test systems. These high-value, long-lead assets enable patterning, materials engineering, yield control, and back-end test/packaging across fabs." .
+
+
+:Fabless_Cluster rdfs:comment "Cluster Fabless - Fabless semiconductor companies design and sell chips while outsourcing wafer fabrication to foundries (e.g., TSMC), letting them focus capital on architecture, IP, and go-to-market instead of owning fabs." .
+
+
+:Intellectual_Property_and_Electronic_Design_Automation_Cluster rdfs:comment "Cluster IP/EDA - IP/EDA covers the software and reusable intellectual-property blocks used to design, verify, and  sign off semiconductor devices—spanning logic/physical design, verification, packaging/system simulation, and licensable CPU/GPU/connectivity/security IP that SoC teams integrate to shorten time-to-market" .
+
+
+:Materials_Cluster rdfs:comment "Cluster Material - In semiconductor manufacturing, “materials” are the ultra-high-purity substances and consumables used to fabricate and package devices (e.g., silicon wafers/substrates, process gases, wet chemicals, photoresists, metals and dielectrics, Chemical Mechanical Planarization slurries, and packaging/encapsulation materials)." .
+
+
+:Outsourced_Semiconductor_Assembly_and_Test_and_Integrated_Device_Manufacturer_Backend_Cluster rdfs:comment """Cluster OSAT/IDM Backend - Covers assembly, packaging, and final test of chips—everything after wafer fab—spanning wafer bumping/singulation, die attach/wirebond/flip-chip, molding, substrate attach, advanced packaging and system-level/final test. Includes pure-play OSATs that provide outsourced 
+services as well as IDMs/foundries with in-house/contracted back-end capacity""" .
+
+
+:Photonics_Cluster rdfs:comment "Cluster Photonics - Photonics in semiconductors encompasses integrated photonics and optical interconnects—using silicon, silicon nitride, and III–V compound semiconductor photonic chips such as indium phosphide—with lasers, modulators, detectors, optical digital signal processors, and transceiver modules. These technologies are used for data centers, telecommunications, and sensing." .
+
+
+:Silicon_Foundry_and_Integrated_Device_Manufacturer_Frontend_Cluster rdfs:comment "Cluster SiFo/IDM Frontend - Covers silicon foundries and integrated device manufacturers from 100 to 300 millimeter wafer process, from front-end transistor formation to back-end interconnect, including lithography, deposition, etching, ion implantation and diffusion, cleaning, and chemical mechanical polishing." .
+
+
+<http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Research_&_Development_and_Academia_Cluster> rdfs:comment "Cluster R&D/Academia - Universities and public research organizations that educate talent and run shared cleanrooms, pilot lines, and design ecosystems for semiconductor R&D—often in close partnership with industry. This includes academic nanofabs and mission-driven R&D hubs that provide CAD/PDK access, process labs, and prototyping." .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
