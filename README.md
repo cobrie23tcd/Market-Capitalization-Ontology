@@ -1,2 +1,2 @@
 # Market-Capitalization-Ontology
-An OWL 2 ontology modelling market capitalisation data for financial knowledge representation
+OWL 2 ontology for market capitalisation, developed for the Industrial Alliance on Processors and Semiconductor Technologies (IAPST) Stress Test Working Group
