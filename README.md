@@ -1,5 +1,4 @@
 # Market Capitalisation Ontology (MCO)
-
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20702097.svg)](https://doi.org/10.5281/zenodo.20702097)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![OWL 2](https://img.shields.io/badge/OWL-2-blue.svg)](https://www.w3.org/TR/owl2-overview/)
@@ -12,11 +11,36 @@
 > **📦 Cite this ontology:**
 > [https://doi.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097)
 
-> *"Ontologies serve as the semantic layer necessary to building competent AI Agents with explicit domain knowledge. They serve to avoid AI hallucination in information retrieval by building a highly knowledgeable semiconductor supply chain model."*
+> _"Ontologies serve as the semantic layer necessary to building competent AI Agents 
+> with explicit domain knowledge. They serve to avoid AI hallucination in information 
+> retrieval by building a highly knowledgeable semiconductor supply chain model."_
+
+---
 
 ## 📌 Description
 
-The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models **semiconductor industry market capitalisation data**, providing a structured semantic representation of the global semiconductor supply chain as defined by the **Industrial Alliance on Processors and Semiconductor Technologies (IAPST)**. It was developed for the **IAPST Stress Test Working Group** and supports time-series querying of market capitalisation snapshots from 1965 to 2026 with annual, quarterly, monthly, and weekly granularity, regional concentration analysis across USA, China, Taiwan, South Korea, Japan, and Rest of World, supply-chain cluster mapping across 13 clusters covering the full semiconductor value chain, cluster-level market cap aggregation using a proportion-weighted formula, and semantic AI grounding for semiconductor supply chain knowledge graphs.
+The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models
+**semiconductor industry market capitalisation data**, providing a structured semantic
+representation of the global semiconductor supply chain as defined by the
+**Industrial Alliance on Processors and Semiconductor Technologies (IAPST)**.
+
+It was developed for the **IAPST Stress Test Working Group** and supports:
+
+- Time-series querying of market capitalisation snapshots from **1965 to 2026**
+  with annual, quarterly, monthly, and weekly granularity
+- **Regional concentration analysis** across USA, China, Taiwan, South Korea,
+  Japan, and Rest of World
+- **Supply-chain cluster mapping** across 13 clusters covering the full
+  semiconductor value chain
+- **Cluster-level market cap aggregation** using a proportion-weighted formula
+- **Semantic AI grounding** for semiconductor supply chain knowledge graphs
+
+> ⚠️ **Note:** This ontology represents the **base mapping layer only**.
+> It defines the semantic structure for data integration.
+> Data collection is conducted separately and mapped onto this ontology
+> using RML-based knowledge graph materialisation.
+
+---
 
 ## 👥 Authors
 
@@ -24,6 +48,8 @@ The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models **
 |------|-------------|
 | **Yannic Schlosser** | GSD SID IN |
 | **Christine O'Brien** | GSD SID IN |
+
+---
 
 ## 🔍 Ontology Details
 
@@ -40,6 +66,8 @@ The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models **
 | **Purpose** | Market Capitalisation Stress Testing & Supply Chain Mapping |
 | **DOI** | [10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097) |
 | **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+
+---
 
 ## 🏗️ Class Hierarchy
 
@@ -74,6 +102,8 @@ owl:Thing
     └── Regional_Concentration
 ```
 
+---
+
 ## 📦 Cluster Descriptions
 
 | Cluster | Description |
@@ -91,6 +121,8 @@ owl:Thing
 | **Components** | Suppliers of passive and electro-mechanical building blocks — capacitors, connectors, EMI filters, power components |
 | **EMS / ODM** | Electronic Manufacturing Services / Original Design Manufacturers providing design, sourcing, assembly, and test for OEMs |
 
+---
+
 ## 🔗 Object Properties
 
 | Property | Domain | Range | Description |
@@ -104,10 +136,12 @@ owl:Thing
 | `recievesGoodsFrom` | Cluster | Cluster | Inverse of `flowsGoodsTo` |
 | `recievesMoneyFrom` | Cluster | Cluster | Inverse of `flowsMoneyTo` |
 | `recievesInformationFrom` | Cluster | Cluster | Inverse of `flowsInformationTo` |
-| `reportsOnCompany` | Market_Capitalization | Company | Links a MC report to the Company it covers |
-| `reportsOnCluster` | Market_Capitalization | Cluster | Links a MC report to the Cluster it covers |
-| `reportsOnRegion` | Regional_Concentration | Region | Links a Regional Concentration report to its Region |
-| `snapshotDate` | Market_Capitalization | — | Time instant of the market cap observation (W3C Time Ontology) |
+| `reportsOnCompany` | Market_Capitalization | Company | Links a MC report individual to the Company it covers |
+| `reportsOnCluster` | Market_Capitalization | Cluster | Links a MC report individual to the Cluster it covers |
+| `reportsOnRegion` | Regional_Concentration | Region | Links a Regional Concentration individual to its Region |
+| `reportsOnCompany` | Regional_Concentration | Company | Links a Regional Concentration individual to the Company it covers |
+
+---
 
 ## 📊 Data Properties
 
@@ -115,6 +149,42 @@ owl:Thing
 |----------|--------|-------|-------------|
 | `hasMarketCapitalizationValueBillionsUSD` | Market_Capitalization | `xsd:decimal` | Market cap value in billions USD at snapshot date |
 | `hasProportionInCluster` | Market_Capitalization | `xsd:decimal` | Company's proportional attribution to a Cluster (P_ij). Sum across all clusters per company = 1.0 |
+| `hasConcentrationInRegion` | Regional_Concentration | `xsd:decimal` | The proportion of a company's market cap attributed to a specific region (P_ir). Sum across all regions per company = 1.0 |
+| `snapshotDate` | Market_Capitalization ∪ Regional_Concentration | `xsd:string` | Date of the observation snapshot in format `DD_MM_YYYY` |
+
+---
+
+## 🗂️ Regional Concentration Triple Structure
+
+The `Regional_Concentration` class uses a **reification pattern** where each individual
+represents a single company–region–date observation. This allows companies operating
+across multiple regions to have multiple `Regional_Concentration` individuals.
+
+```
+Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
+    ├── :reportsOnCompany   → :Company          (Object Property)
+    ├── :reportsOnRegion    → :Region            (Object Property)
+    ├── :hasConcentrationInRegion → xsd:decimal  (Data Property)
+    └── :snapshotDate       → xsd:string         (Data Property)
+```
+
+**Example in Turtle:**
+
+```turtle
+:Regional_Concentration_AMD_31_12_2024_Taiwan
+    a :Regional_Concentration ;
+    :reportsOnCompany :AMD ;
+    :reportsOnRegion  :Taiwan ;
+    :hasConcentrationInRegion "0.65"^^xsd:decimal ;
+    :snapshotDate "31_12_2024"^^xsd:string .
+```
+
+> Companies spanning multiple regions will have **multiple separate
+> `Regional_Concentration` individuals**, one per region, with the constraint
+> that the sum of `hasConcentrationInRegion` values per company across all
+> regions equals `1.0`.
+
+---
 
 ## 📐 Market Capitalisation Formulas
 
@@ -126,7 +196,11 @@ Cluster-level market capitalisation is computed as:
 MC_j = Σ (P_ij × MC_i)   for all companies i in Co
 ```
 
-Where `MC_i` is `hasMarketCapitalizationValueBillionsUSD` on the Market_Capitalization individual, `P_ij` is `hasProportionInCluster` representing the proportion of company i attributed to cluster j, `Co` is the full set of all Company individuals, and the constraint holds that the sum of `P_ij` per company across all clusters equals 1.0.
+Where:
+- `MC_i` is `hasMarketCapitalizationValueBillionsUSD` on the Market_Capitalization individual
+- `P_ij` is `hasProportionInCluster` — the proportion of company i attributed to cluster j
+- `Co` is the full set of all Company individuals
+- Constraint: the sum of `P_ij` per company across all clusters equals `1.0`
 
 **2. Market Capitalisation by Region**
 
@@ -139,45 +213,63 @@ MC_r = Σ (MC_i × P_ir)   for all companies i in Co
 | Symbol | Description |
 |--------|-------------|
 | `MC_r` | Total market cap attributed to region r |
-| `MC_i` | Total market cap of company i (raw financial figure) |
-| `P_ir` | The proportion of company i's market cap allocated to region r |
+| `MC_i` | Total market cap of company i |
+| `P_ir` | `hasConcentrationInRegion` — proportion of company i's market cap in region r |
 | `Co` | The set of all companies in the ontology |
 
-Where `MC_i` is the raw market cap of company i, `P_ir` is the proportion of company i's business in region r, and `P_ir` is the proportion of operations in region r. The constraint holds that the sum of `P_ir` per company across all regions equals 1.0.
+Constraint: the sum of `P_ir` per company across all regions equals `1.0`.
 
-Total market capitalisation across all regions is then:
+Total market capitalisation across all regions:
 
 ```
 MC_T = Σ MC_r   summed across all regions r = 1 to n
 ```
 
-The `Regional_Concentration` class in the ontology captures this via the `reportsOnRegion` object property, which links each `Regional_Concentration` report individual to its corresponding `Region` class instance.
+---
 
 ## 🏢 Modelled Companies
 
-**Equipment:** ASML · ASM International · Applied Materials · Aixtron · KLA · Lam Research · SUSS MicroTec · TRUMPF · Zeiss · Axelera AI
+**Equipment:** ASML · ASM International · Applied Materials · Aixtron · KLA ·
+Lam Research · SUSS MicroTec · TRUMPF · Zeiss · Axelera AI
 
-**Fabless:** NVIDIA · AMD · Qualcomm · Broadcom · NXP · SiPearl · Realtek · Will Semiconductor
+**Fabless:** NVIDIA · AMD · Qualcomm · Broadcom · NXP · SiPearl · Realtek ·
+Will Semiconductor
 
-**Silicon Foundry / IDM Frontend:** TSMC · Intel · Samsung · GlobalFoundries · SMIC · UMC · STMicroelectronics · Infineon · Texas Instruments · Analog Devices · Micron · NXP · Bosch · Diodes Incorporated · Diotec Semiconductor · Elmos Semiconductor · TMX · Vishay · X-Fab
+**Silicon Foundry / IDM Frontend:** TSMC · Intel · Samsung · GlobalFoundries ·
+SMIC · UMC · STMicroelectronics · Infineon · Texas Instruments · Analog Devices ·
+Micron · NXP · Bosch · Diodes Incorporated · Diotec Semiconductor ·
+Elmos Semiconductor · TMX · Vishay · X-Fab
 
-**OSAT / IDM Backend:** ASE · STMicroelectronics · TSMC · Bosch · Presto Engineering · STATS ChipPAC · Silicon Box · Swissbit
+**OSAT / IDM Backend:** ASE · STMicroelectronics · TSMC · Bosch ·
+Presto Engineering · STATS ChipPAC · Silicon Box · Swissbit
 
-**Materials:** Air Liquide · Entegris · GlobalWafers · Siltronic · Soitec · Tokyo Ohka Kogyo
+**Materials:** Air Liquide · Entegris · GlobalWafers · Siltronic · Soitec ·
+Tokyo Ohka Kogyo
 
-**IP / EDA:** Arm · Cadence · Synopsys · Siemens · Celus · Codasip · Defacto Technologies
+**IP / EDA:** Arm · Cadence · Synopsys · Siemens · Celus · Codasip ·
+Defacto Technologies
 
-**Photonics:** Broadcom · Coherent Corp · GlobalFoundries · Hamamatsu Photonics · SensL/onsemi · Soitec · Sony Semiconductor Solutions · STMicroelectronics · VCSEL · X-Fab
+**Photonics:** Broadcom · Coherent Corp · GlobalFoundries · Hamamatsu Photonics ·
+SensL/onsemi · Soitec · Sony Semiconductor Solutions · STMicroelectronics ·
+VCSEL · X-Fab
 
-**Components:** Continental · HELLA · Murata · TDK · TE Connectivity · Valeo · Vishay · Würth Elektronik · ZF · Samsung · Bosch
+**Components:** Continental · HELLA · Murata · TDK · TE Connectivity · Valeo ·
+Vishay · Würth Elektronik · ZF · Samsung · Bosch
 
-**Applications:** Apple · BMW · Dell · Denso · HP · Hyundai Motor Group · Samsung · Siemens · Stellantis · Volkswagen · Bosch
+**Applications:** Apple · BMW · Dell · Denso · HP · Hyundai Motor Group · Samsung ·
+Siemens · Stellantis · Volkswagen · Bosch
 
-**EMS / ODM:** BYD Electronics · Cicor · Compal Electronics · Foxconn · GPV · Quanta Computer · SANMINA-SCI Germany · Videoton · Zollner Elektronik · cms electronics
+**EMS / ODM:** BYD Electronics · Cicor · Compal Electronics · Foxconn · GPV ·
+Quanta Computer · SANMINA-SCI Germany · Videoton · Zollner Elektronik ·
+cms electronics
 
-**R&D / Academia:** Imec · CEA-Leti / MINATEC · TU Dresden Ecosystem · Tsinghua University · University of Twente
+**R&D / Academia:** Imec · CEA-Leti / MINATEC · TU Dresden Ecosystem ·
+Tsinghua University · University of Twente
 
-**Associations & Others:** AENEAS · AESEMI · AKJ Automotive · BusinessEurope · EPoSS · ESIA · INSIDE Industry Association · SEMI · SIA · ZVEI
+**Associations & Others:** AENEAS · AESEMI · AKJ Automotive · BusinessEurope ·
+EPoSS · ESIA · INSIDE Industry Association · SEMI · SIA · ZVEI
+
+---
 
 ## ⏱️ Temporal Coverage
 
@@ -187,6 +279,8 @@ The `Regional_Concentration` class in the ontology captures this via the `report
 | 1995 – 2020 | Quarterly (Mar, Jun, Sep, Dec) | `Instant_1995_03_31` … `Instant_2020_12_31` |
 | 2021 – 2025 | Monthly (end of month) | `Instant_2021_01_31` … `Instant_2025_12_31` |
 | 2026 | Weekly (from 2 January 2026) | `Instant_2026_01_02` … `Instant_2026_05_01` |
+
+---
 
 ## 🌍 Regional Coverage
 
@@ -199,9 +293,15 @@ The `Regional_Concentration` class in the ontology captures this via the `report
 | 🇯🇵 **Japan** | Tokyo Electron, Advantest, Murata, TDK, Hamamatsu Photonics, Tokyo Ohka Kogyo |
 | 🌐 **Other** | ASML, ASM International, Infineon, STMicroelectronics, NXP, Soitec, Siltronic, Aixtron |
 
+---
+
 ## 🔗 Supply Chain Flow Properties
 
-The ontology models directional flows between clusters using three symmetric property pairs: `flowsGoodsTo` ↔ `recievesGoodsFrom`, `flowsMoneyTo` ↔ `recievesMoneyFrom`, and `flowsInformationTo` ↔ `recievesInformationFrom`.
+The ontology models directional flows between clusters using three symmetric
+property pairs:
+`flowsGoodsTo` ↔ `recievesGoodsFrom`,
+`flowsMoneyTo` ↔ `recievesMoneyFrom`,
+`flowsInformationTo` ↔ `recievesInformationFrom`.
 
 ```
 Materials ──────────────────► SiFo/IDM Frontend
@@ -215,6 +315,8 @@ OSAT/IDM Backend ───────────► Customer Cluster
 Photonics ──────────────────► Customer Cluster
 Customer Cluster ────────────► Applications Cluster
 ```
+
+---
 
 ## 💻 SPARQL Query Examples
 
@@ -285,6 +387,40 @@ WHERE {
 ORDER BY ?sourceCluster
 ```
 
+**Query 6 — Get all regional concentration values for a company**
+
+```sparql
+PREFIX : <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/>
+
+SELECT ?company ?region ?concentration ?date
+WHERE {
+    ?report a :Regional_Concentration ;
+            :reportsOnCompany ?company ;
+            :reportsOnRegion ?region ;
+            :hasConcentrationInRegion ?concentration ;
+            :snapshotDate ?date .
+}
+ORDER BY ?company ?date ?region
+```
+
+**Query 7 — Get regional concentration for all companies at a specific snapshot**
+
+```sparql
+PREFIX : <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/>
+
+SELECT ?company ?region ?concentration
+WHERE {
+    ?report a :Regional_Concentration ;
+            :reportsOnCompany ?company ;
+            :reportsOnRegion ?region ;
+            :hasConcentrationInRegion ?concentration ;
+            :snapshotDate "31_12_2024"^^xsd:string .
+}
+ORDER BY ?company DESC(?concentration)
+```
+
+---
+
 ## 🌐 Access and Citation
 
 **Interactive Visualisation (WebVOWL)**
@@ -305,6 +441,8 @@ https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/Ma
 https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_base_for_mapping.ttl
 ```
 
+---
+
 ## 📖 Citation
 
 ```bibtex
@@ -318,6 +456,8 @@ https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_bas
 }
 ```
 
+---
+
 ## Acknowledgements
 
 | Tool / Resource | Role |
@@ -326,8 +466,7 @@ https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_bas
 | [W3C Time Ontology](https://www.w3.org/TR/owl-time/) | Temporal snapshot representation |
 | [WebVOWL (TIB)](https://service.tib.eu/webvowl/) | Interactive ontology visualisation |
 | [Zenodo](https://zenodo.org/) | Persistent DOI and archival |
-| [WRDS — Wharton Research Data Services](https://wrds-www.wharton.upenn.edu/) | Source market capitalisation data |
-| [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) | SPARQL endpoint and querying |
-| [morph-kgc](https://morph-kgc.readthedocs.io/) | RML knowledge graph materialisation |
 
-*Developed for the Industrial Alliance on Processors and Semiconductor Technologies (IAPST) — Stress Test Working Group.*
+_Developed for the Industrial Alliance on Processors and Semiconductor Technologies
+(IAPST) — Stress Test Working Group._
+```
