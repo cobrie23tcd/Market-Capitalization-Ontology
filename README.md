@@ -154,18 +154,65 @@ owl:Thing
 
 ---
 
-## 🗂️ Regional Concentration Triple Structure
+```markdown
+## 🗂️ Report Triple Structures
 
-The `Regional_Concentration` class uses a **reification pattern** where each individual
-represents a single company–region–date observation. This allows companies operating
-across multiple regions to have multiple `Regional_Concentration` individuals.
+The ontology uses a **reification pattern** for both report types, where each
+individual represents a single atomic observation tied to a company and a
+snapshot date. This allows companies operating across multiple clusters or
+regions to have multiple report individuals.
+
+---
+
+### Market_Capitalization
+
+Each `Market_Capitalization` individual represents a single
+**company–cluster–date** observation.
+
+```
+Market_Capitalization_<Company>_<DD_MM_YYYY>_<Cluster>
+    ├── :reportsOnCompany                       → :Company   (Object Property)
+    ├── :reportsOnCluster                       → :Cluster   (Object Property)
+    ├── :hasMarketCapitalizationValueBillionsUSD → xsd:decimal (Data Property)
+    ├── :hasProportionInCluster                 → xsd:decimal (Data Property)
+    └── :snapshotDate                           → xsd:string  (Data Property)
+```
+
+**Example in Turtle:**
+
+```turtle
+:Market_Capitalization_AMD_31_12_2024_Fabless_Cluster
+    a :Market_Capitalization ;
+    :reportsOnCompany                        :AMD ;
+    :reportsOnCluster                        :Fabless_Cluster ;
+    :hasMarketCapitalizationValueBillionsUSD "220.5"^^xsd:decimal ;
+    :hasProportionInCluster                  "0.80"^^xsd:decimal ;
+    :snapshotDate                            "31_12_2024"^^xsd:string .
+```
+
+> Companies spanning **multiple clusters** will have **multiple separate
+> `Market_Capitalization` individuals**, one per cluster, with the constraint
+> that the sum of `hasProportionInCluster` values per company across all
+> clusters equals `1.0`.
+>
+> ⚠️ **Why P is critical:** Many companies span multiple clusters
+> (e.g., Samsung is in both `Materials_Cluster` and
+> `Silicon_Foundry_Cluster`). Additionally, many companies are not
+> 100% semiconductors.
+
+---
+
+### Regional_Concentration
+
+Each `Regional_Concentration` individual represents a single
+**company–region–date** observation.
 
 ```
 Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
-    ├── :reportsOnCompany   → :Company          (Object Property)
-    ├── :reportsOnRegion    → :Region            (Object Property)
-    ├── :hasConcentrationInRegion → xsd:decimal  (Data Property)
-    └── :snapshotDate       → xsd:string         (Data Property)
+    ├── :reportsOnCompany         → :Company    (Object Property)
+    ├── :reportsOnRegion          → :Region     (Object Property)
+    ├── :hasConcentrationInRegion → xsd:decimal (Data Property)
+    └── :snapshotDate             → xsd:string  (Data Property)
 ```
 
 **Example in Turtle:**
@@ -173,16 +220,19 @@ Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
 ```turtle
 :Regional_Concentration_AMD_31_12_2024_Taiwan
     a :Regional_Concentration ;
-    :reportsOnCompany :AMD ;
-    :reportsOnRegion  :Taiwan ;
+    :reportsOnCompany         :AMD ;
+    :reportsOnRegion          :Taiwan ;
     :hasConcentrationInRegion "0.65"^^xsd:decimal ;
-    :snapshotDate "31_12_2024"^^xsd:string .
+    :snapshotDate             "31_12_2024"^^xsd:string .
 ```
 
-> Companies spanning multiple regions will have **multiple separate
+> Companies spanning **multiple regions** will have **multiple separate
 > `Regional_Concentration` individuals**, one per region, with the constraint
 > that the sum of `hasConcentrationInRegion` values per company across all
 > regions equals `1.0`.
+>
+> ⚠️ **Why P is critical:** Many companies span multiple regions
+> (e.g., TSMC operates across Taiwan, USA, and Japan).
 
 ---
 
@@ -190,21 +240,28 @@ Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
 
 **1. Market Capitalisation by Cluster**
 
-Cluster-level market capitalisation is computed as:
-
 ```
-MC_j = Σ (P_ij × MC_i)   for all companies i in Co
+MC_j = Σ (MC_i × P_ij)   for all companies i in Co
 ```
 
-Where:
-- `MC_i` is `hasMarketCapitalizationValueBillionsUSD` on the Market_Capitalization individual
-- `P_ij` is `hasProportionInCluster` — the proportion of company i attributed to cluster j
-- `Co` is the full set of all Company individuals
-- Constraint: the sum of `P_ij` per company across all clusters equals `1.0`
+| Symbol | Description |
+|--------|-------------|
+| `MC_j` | Total market cap attributed to cluster j |
+| `MC_i` | Total market cap of company i (raw financial figure) |
+| `P_ij` | `hasProportionInCluster` — proportion of company i's market cap allocated to cluster j |
+| `Co` | The set of all companies in the ontology |
+
+Constraint: the sum of `P_ij` per company across all clusters equals `1.0`.
+
+Total market capitalisation across all clusters:
+
+```
+MC_T = Σ MC_j   summed across all clusters j = 1 to n
+```
+
+---
 
 **2. Market Capitalisation by Region**
-
-Regional market capitalisation is computed as:
 
 ```
 MC_r = Σ (MC_i × P_ir)   for all companies i in Co
@@ -213,8 +270,8 @@ MC_r = Σ (MC_i × P_ir)   for all companies i in Co
 | Symbol | Description |
 |--------|-------------|
 | `MC_r` | Total market cap attributed to region r |
-| `MC_i` | Total market cap of company i |
-| `P_ir` | `hasConcentrationInRegion` — proportion of company i's market cap in region r |
+| `MC_i` | Total market cap of company i (raw financial figure) |
+| `P_ir` | `hasConcentrationInRegion` — proportion of company i's market cap allocated to region r |
 | `Co` | The set of all companies in the ontology |
 
 Constraint: the sum of `P_ir` per company across all regions equals `1.0`.
@@ -224,8 +281,6 @@ Total market capitalisation across all regions:
 ```
 MC_T = Σ MC_r   summed across all regions r = 1 to n
 ```
-
----
 
 ## 🏢 Modelled Companies
 
