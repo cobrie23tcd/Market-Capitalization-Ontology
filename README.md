@@ -1,4 +1,4 @@
-# Market Capitalisation Ontology 
+# Market Capitalisation Ontology (MCO)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20702097.svg)](https://doi.org/10.5281/zenodo.20702097)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
@@ -116,7 +116,9 @@ owl:Thing
 | `hasMarketCapitalizationValueBillionsUSD` | Market_Capitalization | `xsd:decimal` | Market cap value in billions USD at snapshot date |
 | `hasProportionInCluster` | Market_Capitalization | `xsd:decimal` | Company's proportional attribution to a Cluster (P_ij). Sum across all clusters per company = 1.0 |
 
-## 📐 Market Capitalisation Formula
+## 📐 Market Capitalisation Formulas
+
+**1. Market Capitalisation by Cluster**
 
 Cluster-level market capitalisation is computed as:
 
@@ -124,7 +126,32 @@ Cluster-level market capitalisation is computed as:
 MC_j = Σ (P_ij × MC_i)   for all companies i in Co
 ```
 
-Where `MC_i` is `hasMarketCapitalizationValueBillionsUSD` on the Market_Capitalization individual, `P_ij` is `hasProportionInCluster` representing the proportion of company i attributed to cluster j, `Co` is the full set of all Company individuals, and the constraint holds that the sum of `P_ij` per company across all clusters equals 1.0. Regional concentration follows the same pattern: `MC_r = Σ (MC_i × P_ir)` for all companies, and total market cap is `MC_T = Σ MC_r` summed across all regions r.
+Where `MC_i` is `hasMarketCapitalizationValueBillionsUSD` on the Market_Capitalization individual, `P_ij` is `hasProportionInCluster` representing the proportion of company i attributed to cluster j, `Co` is the full set of all Company individuals, and the constraint holds that the sum of `P_ij` per company across all clusters equals 1.0.
+
+**2. Market Capitalisation by Region**
+
+Regional market capitalisation is computed as:
+
+```
+MC_r = Σ (MC_i × P_ir)   for all companies i in Co
+```
+
+| Symbol | Description |
+|--------|-------------|
+| `MC_r` | Total market cap attributed to region r |
+| `MC_i` | Total market cap of company i (raw financial figure) |
+| `P_ir` | The proportion of company i's market cap allocated to region r |
+| `Co` | The set of all companies in the ontology |
+
+Where `MC_i` is the raw market cap of company i, `P_ir` is the proportion of company i's business in region r, and `P_ir` is the proportion of operations in region r. The constraint holds that the sum of `P_ir` per company across all regions equals 1.0.
+
+Total market capitalisation across all regions is then:
+
+```
+MC_T = Σ MC_r   summed across all regions r = 1 to n
+```
+
+The `Regional_Concentration` class in the ontology captures this via the `reportsOnRegion` object property, which links each `Regional_Concentration` report individual to its corresponding `Region` class instance.
 
 ## 🏢 Modelled Companies
 
@@ -291,11 +318,7 @@ https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_bas
 }
 ```
 
-## 📄 License
-
-This ontology is released under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) licence. You are free to share and adapt this material for any purpose, provided appropriate credit is given.
-
-## 🙏 Acknowledgements
+## Acknowledgements
 
 | Tool / Resource | Role |
 |-----------------|------|
