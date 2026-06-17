@@ -1,6 +1,6 @@
 # Market Capitalisation Ontology 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20702097.svg)](https://doi.org/10.5281/zenodo.20702097)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20702097.svg)](https://doi.org/10.5281/zenodo.20729152)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![OWL 2](https://img.shields.io/badge/OWL-2-blue.svg)](https://www.w3.org/TR/owl2-overview/)
 [![Turtle](https://img.shields.io/badge/Serialisation-Turtle-green.svg)](https://www.w3.org/TR/turtle/)
@@ -8,8 +8,6 @@
 
 > **🔍 Explore the ontology interactively:**
 > [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
-> **📦 Cite this ontology:**
-> [https://doi.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097)
 >
 > _"Ontologies serve as the semantic layer necessary to building competent AI Agents with explicit domain knowledge. They serve to avoid AI hallucination in information retrieval by building a highly knowledgeable semiconductor supply chain model."_
 
@@ -53,7 +51,7 @@ It was developed for the **IAPST Stress Test Working Group** and supports:
 | **External Vocabularies** | OWL 2, RDF, RDFS, XSD, W3C Time Ontology (`time:`) |
 | **Domain** | Semiconductor Supply Chain / Financial Markets |
 | **Purpose** | Market Capitalisation Stress Testing & Supply Chain Mapping |
-| **DOI** | [10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097) |
+| **DOI** | [10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20729152) |
 | **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 
 ---
@@ -443,7 +441,7 @@ https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/Ma
 
 **Zenodo Record**
 
-🔗 DOI: [https://doi.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097)
+🔗 : [https://.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.207291529
 
 **Direct Download (raw Turtle file)**
 
