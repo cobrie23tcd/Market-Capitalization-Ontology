@@ -4,11 +4,10 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![OWL 2](https://img.shields.io/badge/OWL-2-blue.svg)](https://www.w3.org/TR/owl2-overview/)
 [![Turtle](https://img.shields.io/badge/Serialisation-Turtle-green.svg)](https://www.w3.org/TR/turtle/)
-[![WebVOWL](https://img.shields.io/badge/Visualise-WebVOWL-orange.svg)](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_base_for_mapping.ttl)
+[![WebVOWL](https://img.shields.io/badge/Visualise-WebVOWL-orange.svg)](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
 
 > **🔍 Explore the ontology interactively:**
-> [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_base_for_mapping.ttl)
->
+> [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
 > **📦 Cite this ontology:**
 > [https://doi.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.20702097)
 >
@@ -436,7 +435,7 @@ ORDER BY ?company DESC(?concentration)
 
 **Interactive Visualisation (WebVOWL)**
 
-🔗 [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_base_for_mapping.ttl)
+🔗 [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
 
 ```
 https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_base_for_mapping.ttl
