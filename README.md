@@ -6,14 +6,14 @@
 [![Turtle](https://img.shields.io/badge/Serialisation-Turtle-green.svg)](https://www.w3.org/TR/turtle/)
 [![WebVOWL](https://img.shields.io/badge/Visualise-WebVOWL-orange.svg)](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
 
-> **🔍 Explore the ontology interactively:**
+> **Explore the ontology interactively:**
 > [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
 >
 > _"Ontologies serve as the semantic layer necessary to building competent AI Agents with explicit domain knowledge. They serve to avoid AI hallucination in information retrieval by building a highly knowledgeable semiconductor supply chain model."_
 
 ---
 
-## 📌 Description
+## Description
 
 The **Market Capitalisation Ontology (MCO)** is an OWL 2 ontology that models **semiconductor industry market capitalisation data**, providing a structured semantic representation of the global semiconductor supply chain as defined by the **Industrial Alliance on Processors and Semiconductor Technologies (IAPST)**.
 
@@ -21,15 +21,15 @@ It was developed for the **IAPST Stress Test Working Group** and supports:
 
 - Time-series querying of market capitalisation snapshots from **1965 to 2026** with annual, quarterly, monthly, and weekly granularity
 - **Regional concentration analysis** across USA, China, Taiwan, South Korea, Japan, and Rest of World
-- **Supply-chain cluster mapping** across 13 clusters covering the full semiconductor value chain
+- **Supply-chain cluster mapping** across 12 clusters covering the full semiconductor value chain
 - **Cluster-level market cap aggregation** using a proportion-weighted formula
 - **Semantic AI grounding** for semiconductor supply chain knowledge graphs
 
-> ⚠️ **Note:** This ontology represents the **base mapping layer only**. It defines the semantic structure for data integration. Data collection is conducted separately and mapped onto this ontology using RML-based knowledge graph materialisation.
+> **Note:** This ontology represents the **base mapping layer only**. It defines the semantic structure for data integration. Data collection is conducted separately and mapped onto this ontology using RML-based knowledge graph materialisation.
 
 ---
 
-## 👥 Authors
+## Authors
 
 | Name | Affiliation |
 |------|-------------|
@@ -38,7 +38,7 @@ It was developed for the **IAPST Stress Test Working Group** and supports:
 
 ---
 
-## 🔍 Ontology Details
+## Ontology Details
 
 | Field | Details |
 |-------|---------|
@@ -56,7 +56,7 @@ It was developed for the **IAPST Stress Test Working Group** and supports:
 
 ---
 
-## 🏗️ Class Hierarchy
+## Class Hierarchy
 
 ```
 owl:Thing
@@ -91,7 +91,7 @@ owl:Thing
 
 ---
 
-## 📦 Cluster Descriptions
+## Cluster Descriptions
 
 | Cluster | Description |
 |---------|-------------|
@@ -110,7 +110,7 @@ owl:Thing
 
 ---
 
-## 🔗 Object Properties
+## Object Properties
 
 | Property | Domain | Range | Description |
 |----------|--------|-------|-------------|
@@ -130,7 +130,7 @@ owl:Thing
 
 ---
 
-## 📊 Data Properties
+## Data Properties
 
 | Property | Domain | Range | Description |
 |----------|--------|-------|-------------|
@@ -141,7 +141,7 @@ owl:Thing
 
 ---
 
-## 🗂️ Report Triple Structures
+## Report Triple Structures
 
 The ontology uses a **reification pattern** for both report types, where each individual represents a single atomic observation tied to a company and a snapshot date. This allows companies operating across multiple clusters or regions to have multiple report individuals.
 
@@ -174,7 +174,7 @@ Market_Capitalization_<Company>_<DD_MM_YYYY>_<Cluster>
 
 > Companies spanning **multiple clusters** will have **multiple separate `Market_Capitalization` individuals**, one per cluster, with the constraint that the sum of `hasProportionInCluster` values per company across all clusters equals `1.0`.
 >
-> ⚠️ **Why P is critical:** Many companies span multiple clusters (e.g., Samsung is in both `Materials_Cluster` and `Silicon_Foundry_Cluster`). Additionally, many companies are not 100% semiconductors.
+> **Why P is critical:** Many companies span multiple clusters (e.g., Samsung is in both `Materials_Cluster` and `Silicon_Foundry_Cluster`). Additionally, many companies are not 100% semiconductors.
 
 ---
 
@@ -203,7 +203,7 @@ Regional_Concentration_<Company>_<DD_MM_YYYY>_<Region>
 
 > Companies spanning **multiple regions** will have **multiple separate `Regional_Concentration` individuals**, one per region, with the constraint that the sum of `hasConcentrationInRegion` values per company across all regions equals `1.0`.
 >
-> ⚠️ **Why P is critical:** Many companies span multiple regions (e.g., TSMC operates across Taiwan, USA, and Japan).
+> **Why P is critical:** Many companies span multiple regions (e.g., TSMC operates across Taiwan, USA, and Japan).
 
 ---
 
@@ -255,7 +255,7 @@ MC_T = Σ MC_r   summed across all regions r = 1 to n
 
 ---
 
-## 🏢 Modelled Companies
+## Modelled Companies
 
 **Equipment:** ASML · ASM International · Applied Materials · Aixtron · KLA · Lam Research · SUSS MicroTec · TRUMPF · Zeiss · Axelera AI
 
@@ -283,7 +283,7 @@ MC_T = Σ MC_r   summed across all regions r = 1 to n
 
 ---
 
-## ⏱️ Temporal Coverage
+## Temporal Coverage
 
 | Period | Granularity | Example Individuals |
 |--------|-------------|---------------------|
@@ -294,20 +294,20 @@ MC_T = Σ MC_r   summed across all regions r = 1 to n
 
 ---
 
-## 🌍 Regional Coverage
+## Regional Coverage
 
 | Region | Representative Companies |
 |--------|--------------------------|
-| 🇺🇸 **USA** | NVIDIA, AMD, Qualcomm, Intel, Applied Materials, KLA, Lam Research |
-| 🇨🇳 **China** | SMIC, YMTC, Naura Technology, Cambricon Technology, Will Semiconductor, Huawei |
-| 🇹🇼 **Taiwan** | TSMC, UMC, ASE, GlobalWafers, MediaTek, Realtek, Compal Electronics |
-| 🇰🇷 **South Korea** | Samsung, SK Hynix |
-| 🇯🇵 **Japan** | Tokyo Electron, Advantest, Murata, TDK, Hamamatsu Photonics, Tokyo Ohka Kogyo |
-| 🌐 **Other** | ASML, ASM International, Infineon, STMicroelectronics, NXP, Soitec, Siltronic, Aixtron |
+| **USA** | NVIDIA, AMD, Qualcomm, Intel, Applied Materials, KLA, Lam Research |
+| **China** | SMIC, YMTC, Naura Technology, Cambricon Technology, Will Semiconductor, Huawei |
+| **Taiwan** | TSMC, UMC, ASE, GlobalWafers, MediaTek, Realtek, Compal Electronics |
+| **South Korea** | Samsung, SK Hynix |
+| **Japan** | Tokyo Electron, Advantest, Murata, TDK, Hamamatsu Photonics, Tokyo Ohka Kogyo |
+| **Other** | ASML, ASM International, Infineon, STMicroelectronics, NXP, Soitec, Siltronic, Aixtron |
 
 ---
 
-## 🔗 Supply Chain Flow Properties
+## Supply Chain Flow Properties
 
 The ontology models directional flows between clusters using three symmetric property pairs: `flowsGoodsTo` ↔ `recievesGoodsFrom`, `flowsMoneyTo` ↔ `recievesMoneyFrom`, and `flowsInformationTo` ↔ `recievesInformationFrom`.
 
@@ -326,7 +326,7 @@ Customer Cluster ────────────► Applications Cluster
 
 ---
 
-## 💻 SPARQL Query Examples
+## SPARQL Query Examples
 
 **Query 1 — List all companies in the Fabless Cluster**
 
@@ -429,11 +429,11 @@ ORDER BY ?company DESC(?concentration)
 
 ---
 
-## 🌐 Access and Citation
+## Access and Citation
 
 **Interactive Visualisation (WebVOWL)**
 
-🔗 [Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
+[Open in WebVOWL](https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20729152/files/MarketCapitalizationOntology_16.05_base_for_mapping.ttl?download=1)
 
 ```
 https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_base_for_mapping.ttl
@@ -441,7 +441,7 @@ https://service.tib.eu/webvowl/#iri=https://zenodo.org/records/20702097/files/Ma
 
 **Zenodo Record**
 
-🔗 : [https://.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.207291529
+: [https://.org/10.5281/zenodo.20702097](https://doi.org/10.5281/zenodo.207291529
 
 **Direct Download (raw Turtle file)**
 
@@ -451,7 +451,7 @@ https://zenodo.org/records/20702097/files/MarketCapitalizationOntology_15.05_bas
 
 ---
 
-## 📖 Citation
+## Citation
 
 ```bibtex
 @software{schlosser_obrien_mco_2026,
