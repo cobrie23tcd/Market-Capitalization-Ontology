@@ -4,6 +4,11 @@ Maps semiconductor **market capitalisation** and **regional concentration** data
 onto the [Market Capitalisation Ontology (MCO)](ontology/MarketCapitalizationOntology_16.05_base_for_mapping.ttl)
 using morph-kgc (RML) and produces a merged knowledge graph.
 
+> **📖 Full ontology reference:** [docs/ONTOLOGY_REFERENCE.md](docs/ONTOLOGY_REFERENCE.md)
+> — class hierarchy, cluster descriptions, object/data properties, report triple
+> structures, market-cap formulas, modelled companies, temporal/regional coverage,
+> and SPARQL query examples. (This is the original detailed README, preserved.)
+
 ## Directory structure
 
 ```
@@ -20,6 +25,8 @@ Ontology Development/
 │   └── run_mapping.py                                            ← run this
 ├── output/
 │   └── knowledge_graph.ttl                                       Generated (ontology + data)
+├── docs/
+│   └── ONTOLOGY_REFERENCE.md                                     Full ontology documentation
 └── archive/
     ├── database_market_capitalization_populated.csv             Previous data (legacy format)
     └── database_revisions/
