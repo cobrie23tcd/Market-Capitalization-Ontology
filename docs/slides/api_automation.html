@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Automating Market-Cap Data Ingestion via APIs</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --panel2: #273449;
+    --accent: #38bdf8;
+    --accent2: #34d399;
+    --accent3: #fbbf24;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --line: #334155;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #020617;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: radial-gradient(1200px 700px at 15% -10%, #16324f 0%, var(--bg) 55%);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 40px 48px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  header { border-bottom: 2px solid var(--line); padding-bottom: 14px; margin-bottom: 18px; }
+  .kicker { color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+  h1 { font-size: 30px; font-weight: 700; margin-top: 4px; }
+  .body { display: grid; grid-template-columns: 1.15fr 1fr; gap: 26px; flex: 1; min-height: 0; }
+
+  /* Pipeline */
+  .section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 12px; font-weight: 700; }
+  .pipe { display: flex; flex-direction: column; gap: 10px; }
+  .stage {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .stage .t { font-weight: 700; font-size: 15px; }
+  .stage .d { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .stage.green { border-left-color: var(--accent2); }
+  .stage.amber { border-left-color: var(--accent3); }
+  .arrow { text-align: center; color: var(--muted); font-size: 14px; line-height: 6px; }
+
+  /* APIs */
+  .apis { display: flex; flex-direction: column; gap: 12px; }
+  .card { background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; }
+  .card h3 { font-size: 13px; color: var(--accent); margin-bottom: 6px; }
+  .card p { font-size: 12.5px; color: var(--text); line-height: 1.5; }
+  .card p b { color: #fff; }
+
+  footer { margin-top: 16px; border-top: 2px solid var(--line); padding-top: 12px; display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .note .h { font-size: 12.5px; font-weight: 700; margin-bottom: 3px; }
+  .note.a .h { color: var(--accent); }
+  .note.b .h { color: var(--accent2); }
+  .note.c .h { color: var(--accent3); }
+  .note p { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+  .tag { display:inline-block; font-size:11px; color:#cbd5e1; background:#0b1220; border:1px solid var(--line); border-radius:6px; padding:1px 7px; margin:2px 3px 0 0; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <header>
+      <div class="kicker">Market Capitalisation Ontology &middot; Data Automation</div>
+      <h1>Automating Market-Cap Ingestion into the Knowledge Graph</h1>
+    </header>
+
+    <div class="body">
+      <!-- LEFT: pipeline -->
+      <div>
+        <div class="section-title">Automated ETL &rarr; RML pipeline</div>
+        <div class="pipe">
+          <div class="stage">
+            <div class="t">1 &middot; Resolve identifiers</div>
+            <div class="d">Canonical company name &rarr; ticker / ISIN / FIGI &amp; HQ region (OpenFIGI, Wikidata)</div>
+          </div>
+          <div class="arrow">&#9660;</div>
+          <div class="stage">
+            <div class="t">2 &middot; Fetch market cap per snapshot date</div>
+            <div class="d">API call, or price &times; shares-outstanding; convert to USD billions via FX API</div>
+          </div>
+          <div class="arrow">&#9660;</div>
+          <div class="stage amber">
+            <div class="t">3 &middot; Derive proportions (P&#8339;&#8323; / P&#8339;&#7523;)</div>
+            <div class="d">Segment-revenue &amp; geo-revenue from filings; LLM/curated fallback &mdash; needs review</div>
+          </div>
+          <div class="arrow">&#9660;</div>
+          <div class="stage green">
+            <div class="t">4 &middot; Write CSV templates</div>
+            <div class="d">data/market_capitalization.csv &amp; regional_concentration.csv (exact schema)</div>
+          </div>
+          <div class="arrow">&#9660;</div>
+          <div class="stage green">
+            <div class="t">5 &middot; Materialise &amp; validate</div>
+            <div class="d">python scripts/run_mapping.py &rarr; morph-kgc RML &rarr; knowledge_graph.ttl + SHACL checks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: candidate APIs -->
+      <div>
+        <div class="section-title">Candidate data sources</div>
+        <div class="apis">
+          <div class="card">
+            <h3>Market cap &amp; prices</h3>
+            <p><b>Financial Modeling Prep</b> (historical market-cap endpoint), <b>EODHD</b>, <b>Polygon.io</b>, <b>Finnhub</b>, <b>Alpha Vantage</b>, <b>Twelve Data</b>, <b>yfinance</b>.</p>
+          </div>
+          <div class="card">
+            <h3>Fundamentals &amp; segments (for P&#8339;&#8323;/P&#8339;&#7523;)</h3>
+            <p><b>SEC EDGAR</b> (shares outstanding, business + geographic segments), FMP / EODHD fundamentals, company annual reports.</p>
+          </div>
+          <div class="card">
+            <h3>Identifiers &amp; metadata</h3>
+            <p><b>OpenFIGI</b> (name&rarr;ticker), <b>Wikidata</b> / GLEIF (HQ country&rarr;Region, LEI, listing history).</p>
+          </div>
+          <div class="card">
+            <h3>FX normalisation</h3>
+            <p><b>ECB</b> / exchangerate.host / Alpha Vantage FX &rarr; convert every value to USD billions.</p>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <span class="tag">Python ETL</span>
+          <span class="tag">GitHub Actions (weekly cron)</span>
+          <span class="tag">Response caching</span>
+          <span class="tag">Idempotent upserts</span>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="note a">
+        <div class="h">Fully automatable</div>
+        <p>Identifier lookup, market-cap fetch, FX conversion, CSV generation, RML materialisation, scheduled commits of updated CSV + graph.</p>
+      </div>
+      <div class="note b">
+        <div class="h">Semi-automated (review)</div>
+        <p>Cluster &amp; regional proportions from segment/geo revenue; human-in-the-loop sign-off; SHACL rule &ldquo;proportions per company = 1.0&rdquo;.</p>
+      </div>
+      <div class="note c">
+        <div class="h">Key constraints</div>
+        <p>Historical depth (most APIs &lt;30 yrs; pre-1994 via EDGAR/archives), API cost &amp; rate limits, data licensing, listing-date gaps.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
