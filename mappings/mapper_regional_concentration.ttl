@@ -1,0 +1,61 @@
+@prefix rr:  <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql:  <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix :    <http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/> .
+
+# ─────────────────────────────────────────────────────────────────────────
+#  Regional_Concentration report individuals
+#  One row per company–snapshotDate–region observation.
+#  Source columns:
+#    company, snapshotDate, reportsOnRegion, hasConcentrationInRegion
+# ─────────────────────────────────────────────────────────────────────────
+
+<#TriplesMapRegionalConcentration>
+    rml:logicalSource [
+        rml:source               "data/regional_concentration.csv" ;
+        rml:referenceFormulation ql:CSV
+    ] ;
+
+    rr:subjectMap [
+        rr:template "http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/Regional_Concentration_{company}_{snapshotDate}_{reportsOnRegion}" ;
+        rr:class owl:NamedIndividual ;
+        rr:class :Regional_Concentration
+    ] ;
+
+    ## ── Object Properties (2) ───────────────────────────────────────────
+
+    rr:predicateObjectMap [
+        rr:predicate :reportsOnCompany ;
+        rr:objectMap [
+            rr:template "http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/{company}" ;
+            rr:termType rr:IRI
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate :reportsOnRegion ;
+        rr:objectMap [
+            rr:template "http://www.semanticweb.org/schlosseryan/ontologies/2026/2/MarketCapitalizationOntology/{reportsOnRegion}" ;
+            rr:termType rr:IRI
+        ]
+    ] ;
+
+    ## ── Data Properties (2) ─────────────────────────────────────────────
+
+    rr:predicateObjectMap [
+        rr:predicate :hasConcentrationInRegion ;
+        rr:objectMap [
+            rml:reference "hasConcentrationInRegion" ;
+            rr:datatype   xsd:decimal
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate :snapshotDate ;
+        rr:objectMap [
+            rml:reference "snapshotDate" ;
+            rr:datatype   xsd:string
+        ]
+    ] .
